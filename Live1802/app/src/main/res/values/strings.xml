@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Live18-02</string>
+    <string name="welcome">Welcome!</string>
+    <string name="you_name">What\'s your name?</string>
+    <string name="next">Next</string>
+
+</resources>
