@@ -30,18 +30,18 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         navController = navController, startDestination = "login"
                     ) {
-                        composable(route = "login") { LoginScreen(navController) }
+                        composable(route = "login") { LoginScreen(navController = navController) }
 
                         composable(route = "menu") { MenuScreen(
-                            navController = TODO()
+                            navController = navController
                         ) }
 
                         composable(route = "pedidos") { PedidosScreen(
-                            navController = TODO()
+                            navController = navController
                         ) }
 
                         composable(route = "perfil") { PerfilScreen(
-                            navController = TODO()
+                            navController = navController
                         ) }
                     }
 

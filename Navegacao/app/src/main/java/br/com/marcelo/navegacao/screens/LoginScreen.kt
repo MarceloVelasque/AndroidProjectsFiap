@@ -39,6 +39,7 @@ fun LoginScreen(navController: NavController) {
         }
     }
 }
+/*
 
 @Preview(showSystemUi = true)
 @Composable
@@ -47,4 +48,4 @@ private fun MenuScreenPreview() {
     MenuScreen( null
     )
 
-}
+}*/
