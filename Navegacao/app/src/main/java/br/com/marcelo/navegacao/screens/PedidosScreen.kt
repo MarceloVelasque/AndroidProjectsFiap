@@ -41,6 +41,7 @@ fun PedidosScreen(navController: NavController){
     }
 }
 
+/*
 @Preview(showSystemUi = true)
 @Composable
 private fun PedidosScreenPreview() {
@@ -48,4 +49,4 @@ private fun PedidosScreenPreview() {
     PerfilScreen(null
     )
 
-}
+}*/

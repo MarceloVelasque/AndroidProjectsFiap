@@ -40,8 +40,10 @@ class MainActivity : ComponentActivity() {
                             navController = navController
                         ) }
 
-                        composable(route = "perfil") { PerfilScreen(
-                            navController = navController
+                        composable(route = "perfil/{nome}") {
+                            var nome = it.arguments?.getString("nome")
+                            PerfilScreen(
+                            navController = navController,  nome!!
                         ) }
                     }
 
