@@ -3,37 +3,12 @@ package br.com.fiap.calculodejuros
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import br.com.fiap.calculodejuros.calculos.calcularJuros
-import br.com.fiap.calculodejuros.calculos.calcularMontante
+import br.com.fiap.calculodejuros.juros.JurosScreen
+import br.com.fiap.calculodejuros.juros.JurosScreenViewModel
 import br.com.fiap.calculodejuros.ui.theme.CalculoDeJurosTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,13 +21,37 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    JurosScreen()
+                    JurosScreen(JurosScreenViewModel())
                 }
             }
         }
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------CÓDIGO ANTERIOR VERBOSO,----------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------------------
+//o que foi feito? foi criado componentes para as caixas de texto em um arquivo aonde tem uma função com os
+// parâmetros , assim foi feito para o card também, deixando o código menos verboso
+//facilitando amanutenção e agilidade de desenvolvimento, foi pegado toda a função que seria o componente
+//pai e foi também criado um arquivo só pra ele
+
+
+
+
+/*
 @Composable
 fun JurosScreen() {
 
@@ -86,55 +85,38 @@ fun JurosScreen() {
                         text = "Dados do Investimento",
                         fontWeight = FontWeight.Bold
                     )
-                    // Caixas de entrada da aplicação
-                    OutlinedTextField(
+
+                    //foi criado um componente caixa de entrada substituindo
+                    // todo o código a cima, deixando menos verboso
+                    // Caixas de entrada da Aplicação
+                    CaixaDeEntrada(
                         value = capital,
-                        onValueChange = { capital = it },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp),
-                        placeholder = {
-                            Text(text = "Quanto deseja investir?")
-                        },
-                        label = {
-                            Text(text = "Valor do investimento")
-                        },
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Decimal
-                        )
-                    )
-                    OutlinedTextField(
+                        placeholder = "Quanto deseja investir",
+                        label = "Valor do investimento",
+                        modifier = Modifier,
+                        keyboardType = KeyboardType.Decimal
+                    ) {
+                        capital = it
+                    }
+                    CaixaDeEntrada(
                         value = taxa,
-                        onValueChange = { taxa = it },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp),
-                        placeholder = {
-                            Text(text = "Qual a taxa de juros mensal?")
-                        },
-                        label = {
-                            Text(text = "Taxa de juros mensal")
-                        },
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Decimal
-                        )
-                    )
-                    OutlinedTextField(
+                        placeholder = "Qual a taxa de juros mensal?",
+                        label = "Taxa de juros mensal",
+                        modifier = Modifier,
+                        keyboardType = KeyboardType.Decimal
+                    ) {
+                        taxa = it
+                    }
+                    CaixaDeEntrada(
                         value = tempo,
-                        onValueChange = { tempo = it },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp),
-                        placeholder = {
-                            Text(text = "Qual o tempo em meses?")
-                        },
-                        label = {
-                            Text(text = "Período em meses")
-                        },
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Decimal
-                        )
-                    )
+                        placeholder = "Qual o período do investimento em meses?",
+                        label = "Período em meses",
+                        modifier = Modifier,
+                        keyboardType = KeyboardType.Decimal
+                    ) {
+                        tempo = it
+                    }
+
                     Button(
                         onClick = {
                             juros = calcularJuros(
@@ -156,8 +138,88 @@ fun JurosScreen() {
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
+
             // Resultado da aplicação
-            Card(
+            CardResultado(juros, montante)
+*/
+
+
+
+            /* OutlinedTextField(
+               value = capital,
+               onValueChange = { capital = it },
+               modifier = Modifier
+                   .fillMaxWidth()
+                   .padding(top = 16.dp),
+               placeholder = {
+                   Text(text = "Quanto deseja investir?")
+               },
+               label = {
+                   Text(text = "Valor do investimento")
+               },
+               keyboardOptions = KeyboardOptions(
+                   keyboardType = KeyboardType.Decimal
+               )
+           )*/
+
+
+            /*    OutlinedTextField(
+                    value = taxa,
+                    onValueChange = { taxa = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    placeholder = {
+                        Text(text = "Qual a taxa de juros mensal?")
+                    },
+                    label = {
+                        Text(text = "Taxa de juros mensal")
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Decimal
+                    )
+                )
+                OutlinedTextField(
+                    value = tempo,
+                    onValueChange = { tempo = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    placeholder = {
+                        Text(text = "Qual o tempo em meses?")
+                    },
+                    label = {
+                        Text(text = "Período em meses")
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Decimal
+                    )
+                )*/
+
+            /*  Button(
+                  onClick = {
+                      juros = calcularJuros(
+                          capital = capital.toDouble(),
+                          taxa = taxa.toDouble(),
+                          tempo = tempo.toDouble()
+                      )
+                      montante = calcularMontante(
+                          capital = capital.toDouble(),
+                          juros = juros
+                      )
+                  },
+                  modifier = Modifier
+                      .fillMaxWidth()
+                      .padding(top = 32.dp)
+              ) {
+                  Text(text = "CALCULAR")
+              }
+          }
+      }
+      Spacer(modifier = Modifier.height(16.dp))
+  */
+
+            /*Card(
                 modifier = Modifier
                     .fillMaxWidth(),
                 colors = CardDefaults.cardColors(
@@ -208,7 +270,7 @@ fun JurosScreen() {
                         )
                     }
                 }
-            }
-        }
+            }*/
+   /*     }
     }
-}
+}*/
