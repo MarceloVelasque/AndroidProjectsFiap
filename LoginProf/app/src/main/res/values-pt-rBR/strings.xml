@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LoginProf</string>
+    <string name="login">Entrar</string>
+    <string name="subtitle">Por favor, digite suas infirmações</string>
+    <string name="email">Forneça seu e-mail</string>
+    <string name="password">Digite a sua senha</string>
+    <string name="Enter">ENTRAR</string>
+</resources>
