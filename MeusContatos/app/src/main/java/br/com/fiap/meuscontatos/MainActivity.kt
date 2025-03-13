@@ -32,11 +32,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.fiap.meuscontatos.database.repository.ContatoRepository
+import br.com.fiap.meuscontatos.model.Contato
 import br.com.fiap.meuscontatos.ui.theme.MeusContatosTheme
 
 class MainActivity : ComponentActivity() {
@@ -83,7 +86,7 @@ fun ContatosScreen() {
             onTelefoneChange = {
                 telefoneState.value = it
             },
-            onAmigoChange ={
+            onAmigoChange = {
                 amigoState.value = it
             }
         )
@@ -101,6 +104,11 @@ fun ContatoForm(
     onTelefoneChange: (String) -> Unit,
     onAmigoChange: (Boolean) -> Unit
 ) {
+    //obter contexto local
+
+    val context = LocalContext.current
+    val contatoRspository = ContatoRepository(context)
+
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
@@ -149,7 +157,15 @@ fun ContatoForm(
         }
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                val contato = Contato(
+                    id = 0,
+                    nome = nome,
+                    telefone = telefone,
+                    isAmigo = amigo
+                )
+                contatoRspository.salvar(contato)
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
@@ -162,12 +178,13 @@ fun ContatoForm(
 
 @Composable
 fun ContatoList() {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)
-        .verticalScroll(rememberScrollState())
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
-        for (i in 0..10){
+        for (i in 0..10) {
             ContatoCard()
             Spacer(modifier = Modifier.height(4.dp))
         }
@@ -185,9 +202,11 @@ fun ContatoCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(modifier = Modifier
-                .padding(8.dp)
-                .weight(2f)) {
+            Column(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .weight(2f)
+            ) {
                 Text(
                     text = "Nome do Contato",
                     fontSize = 24.sp,
