@@ -24,8 +24,10 @@ class ContatoRepository(context: Context) {
         return db.buscarContatoPeloId(id=id)
     }
 
-    fun listarContato(): List<Contato>{
+    fun listarContatos(): List<Contato>{
         return db.listarContatos()
     }
+
+
 
 }
