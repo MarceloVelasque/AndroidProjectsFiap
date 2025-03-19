@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -102,15 +104,35 @@ fun GamesScreen() {
             }
         )
         Spacer(modifier = Modifier.height(16.dp))
+
+        LazyRow {
+            items(listGamesByStudio) {
+                StudioCard(it)
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
         LazyColumn() {
             items(listGamesByStudio) {
                GameCard(it)
             }
 
+
         }
     }
 }
 
+@Composable
+fun StudioCard(game: Game) {
+    Card(modifier = Modifier.size(100.dp).padding(end = 4.dp)) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text(text = game.studio)
+        }
+    }
+}
 @Composable
 fun GameCard(game: Game) {
     Card(modifier = Modifier.padding(bottom = 8.dp)) {
